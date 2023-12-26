@@ -8,5 +8,5 @@
 ## Installation
 
 ```
-Install-Package Soenneker.Extensions.Enumerable.Tuple
+dotnet add package Soenneker.Extensions.Enumerable.Tuple
 ```

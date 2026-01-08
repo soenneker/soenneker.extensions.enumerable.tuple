@@ -3,21 +3,34 @@ using System.Collections.Generic;
 
 namespace Soenneker.Extensions.Enumerable.Tuple;
 
+/// <summary>
+/// Provides extension methods for working with sequences of tuples, enabling convenient operations such as checking for
+/// the presence of specific tuple elements within an enumerable collection.
+/// </summary>
+/// <remarks>This static class contains methods that extend them to simplify common
+/// tuple-based queries. All methods are implemented as extension methods and can be called directly on compatible
+/// enumerable collections. Methods in this class use the default equality comparers for tuple element types unless
+/// otherwise specified.</remarks>
 public static class EnumerableTupleExtension
 {
     /// <summary>
-    /// Checks if the first value and second value equal any of the tuples (item1 & item2) in the enumerable
+    /// Checks if <paramref name="item1"/> and <paramref name="item2"/> match any tuple (Item1 &amp; Item2) in <paramref name="source"/>.
     /// </summary>
     public static bool ContainsItem<TFirst, TSecond>(this IEnumerable<Tuple<TFirst, TSecond>> source, TFirst item1, TSecond item2)
     {
-        using IEnumerator<Tuple<TFirst, TSecond>> enumerator = source.GetEnumerator();
+        if (source is null)
+            throw new ArgumentNullException(nameof(source));
 
-        while (enumerator.MoveNext())
+        var comparer1 = EqualityComparer<TFirst>.Default;
+        var comparer2 = EqualityComparer<TSecond>.Default;
+
+        foreach (var current in source)
         {
-            Tuple<TFirst, TSecond> current = enumerator.Current;
+            // If your sequences may contain null tuples, keep this guard; otherwise you can remove it.
+            if (current is null)
+                continue;
 
-            if (EqualityComparer<TFirst>.Default.Equals(current.Item1, item1) &&
-                EqualityComparer<TSecond>.Default.Equals(current.Item2, item2))
+            if (comparer1.Equals(current.Item1, item1) && comparer2.Equals(current.Item2, item2))
             {
                 return true;
             }
@@ -27,23 +40,13 @@ public static class EnumerableTupleExtension
     }
 
     /// <summary>
-    /// Checks if the first item and second item in the tuple equal any of the tuples (item1 & item2) in the enumerable
+    /// Checks if <paramref name="item"/> matches any tuple (Item1 &amp; Item2) in <paramref name="source"/>.
     /// </summary>
     public static bool ContainsItem<TFirst, TSecond>(this IEnumerable<Tuple<TFirst, TSecond>> source, Tuple<TFirst, TSecond> item)
     {
-        using IEnumerator<Tuple<TFirst, TSecond>> enumerator = source.GetEnumerator();
+        if (item is null)
+            throw new ArgumentNullException(nameof(item));
 
-        while (enumerator.MoveNext())
-        {
-            Tuple<TFirst, TSecond> current = enumerator.Current;
-
-            if (EqualityComparer<TFirst>.Default.Equals(current.Item1, item.Item1) &&
-                EqualityComparer<TSecond>.Default.Equals(current.Item2, item.Item2))
-            {
-                return true;
-            }
-        }
-
-        return false;
+        return source.ContainsItem(item.Item1, item.Item2);
     }
 }

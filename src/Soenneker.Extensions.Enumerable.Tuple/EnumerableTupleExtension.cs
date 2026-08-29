@@ -16,6 +16,7 @@ public static class EnumerableTupleExtension
     /// <summary>
     /// Checks if <paramref name="item1"/> and <paramref name="item2"/> match any tuple (Item1 &amp; Item2) in <paramref name="source"/>.
     /// </summary>
+    /// <returns><see langword="true"/> when <paramref name="item1"/> and <paramref name="item2"/> match any tuple (Item1 &amp; Item2) in <paramref name="source"/>; otherwise <see langword="false"/>.</returns>
     public static bool ContainsItem<TFirst, TSecond>(this IEnumerable<Tuple<TFirst, TSecond>> source, TFirst item1, TSecond item2)
     {
         if (source is null)
@@ -42,6 +43,7 @@ public static class EnumerableTupleExtension
     /// <summary>
     /// Checks if <paramref name="item"/> matches any tuple (Item1 &amp; Item2) in <paramref name="source"/>.
     /// </summary>
+    /// <returns><see langword="true"/> when <paramref name="item"/> matches any tuple (Item1 &amp; Item2) in <paramref name="source"/>; otherwise <see langword="false"/>.</returns>
     public static bool ContainsItem<TFirst, TSecond>(this IEnumerable<Tuple<TFirst, TSecond>> source, Tuple<TFirst, TSecond> item)
     {
         if (item is null)

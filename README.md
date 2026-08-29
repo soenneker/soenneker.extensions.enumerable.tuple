@@ -4,7 +4,7 @@
 [![](https://img.shields.io/github/actions/workflow/status/soenneker/soenneker.extensions.enumerable.tuple/codeql.yml?label=CodeQL&style=for-the-badge)](https://github.com/soenneker/soenneker.extensions.enumerable.tuple/actions/workflows/codeql.yml)
 
 # ![](https://user-images.githubusercontent.com/4441470/224455560-91ed3ee7-f510-4041-a8d2-3fc093025112.png) Soenneker.Extensions.Enumerable.Tuple
-Checks whether a sequence of reference tuples contains a requested pair of values.
+Extension methods for querying and transforming sequences of `System.Tuple` values with element-aware comparisons.
 
 ## Installation
 

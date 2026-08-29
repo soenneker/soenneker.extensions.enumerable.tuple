@@ -4,10 +4,22 @@
 [![](https://img.shields.io/github/actions/workflow/status/soenneker/soenneker.extensions.enumerable.tuple/codeql.yml?label=CodeQL&style=for-the-badge)](https://github.com/soenneker/soenneker.extensions.enumerable.tuple/actions/workflows/codeql.yml)
 
 # ![](https://user-images.githubusercontent.com/4441470/224455560-91ed3ee7-f510-4041-a8d2-3fc093025112.png) Soenneker.Extensions.Enumerable.Tuple
-### A collection of useful IEnumerable<Tuple> extension methods
+A collection of useful IEnumerable<Tuple> extension methods.
 
 ## Installation
 
-```
+```bash
 dotnet add package Soenneker.Extensions.Enumerable.Tuple
 ```
+
+## Quick start
+
+```csharp
+using Soenneker.Extensions.Enumerable.Tuple;
+```
+
+Import the namespace, then call the extension methods directly on the matching value.
+
+## Common operations
+
+- `ContainsItem()` - Checks if `item1` and `item2` match any tuple (Item1 & Item2) in `source`.

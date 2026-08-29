@@ -4,7 +4,7 @@
 [![](https://img.shields.io/github/actions/workflow/status/soenneker/soenneker.extensions.enumerable.tuple/codeql.yml?label=CodeQL&style=for-the-badge)](https://github.com/soenneker/soenneker.extensions.enumerable.tuple/actions/workflows/codeql.yml)
 
 # ![](https://user-images.githubusercontent.com/4441470/224455560-91ed3ee7-f510-4041-a8d2-3fc093025112.png) Soenneker.Extensions.Enumerable.Tuple
-A collection of useful IEnumerable<Tuple> extension methods.
+Checks whether a sequence of reference tuples contains a requested pair of values.
 
 ## Installation
 
@@ -12,14 +12,21 @@ A collection of useful IEnumerable<Tuple> extension methods.
 dotnet add package Soenneker.Extensions.Enumerable.Tuple
 ```
 
-## Quick start
+## Usage
 
 ```csharp
 using Soenneker.Extensions.Enumerable.Tuple;
+
+var routes = new[]
+{
+    Tuple.Create("ORD", "DFW"),
+    Tuple.Create("DFW", "LAX")
+};
+
+bool exists = routes.ContainsItem("ORD", "DFW"); // true
+bool reverseExists = routes.ContainsItem("DFW", "ORD"); // false
 ```
 
-Import the namespace, then call the extension methods directly on the matching value.
+Both tuple positions must match, in order, using `EqualityComparer<T>.Default`. Enumeration stops at the first match and null tuples in the sequence are skipped. The overload accepting a `Tuple<TFirst,TSecond>` throws `ArgumentNullException` when that tuple is null; a null source also throws.
 
-## Common operations
-
-- `ContainsItem()` - Checks if `item1` and `item2` match any tuple (Item1 & Item2) in `source`.
+This package targets `System.Tuple<,>`, not C# value tuples such as `(string, string)`.
